@@ -4,13 +4,13 @@ import { Board } from 'src/board_entity/board.entity';
 import { CreateBoardReqDto } from 'src/RequestDto/createboard.req';
 import { DeleteBoardReqDto } from 'src/RequestDto/deleteboard.req';
 import { EditBoardReqDto } from 'src/RequestDto/editboard.req';
-import { AllBoardBoardResDto } from 'src/ResponeseDto/allboard.board.res';
-import { AllBoardResDto } from 'src/ResponeseDto/allboard.res';
-import { AllBoardUserResDto } from 'src/ResponeseDto/allboard.user.res';
-import { CreateBoardResDto } from 'src/ResponeseDto/createboard.res';
-import { DeleteBoardResDto } from 'src/ResponeseDto/deleteboard.res';
-import { EditBoardResDto } from 'src/ResponeseDto/editboard.res';
-import { GetMyBoardResDto } from 'src/ResponeseDto/get.my.board.res';
+import { AllBoardBoardResDto } from 'src/ResponseDto/allboard.board.res';
+import { AllBoardResDto } from 'src/ResponseDto/allboard.res';
+import { AllBoardUserResDto } from 'src/ResponseDto/allboard.user.res';
+import { CreateBoardResDto } from 'src/ResponseDto/createboard.res';
+import { DeleteBoardResDto } from 'src/ResponseDto/deleteboard.res';
+import { EditBoardResDto } from 'src/ResponseDto/editboard.res';
+import { GetMyBoardResDto } from 'src/ResponseDto/get.my.board.res';
 import { User } from 'src/user_entity/user.entity';
 import { Repository } from 'typeorm';
 
@@ -21,8 +21,6 @@ export class BoardService {
         private readonly boardRepository:Repository<Board>,
         @InjectRepository(User)
         private readonly userRepository:Repository<User>
-        //private readonly 쓰는이유
-        //let 말고 const를 쓰는 이유
     ){}
 
     //게시글 작성
@@ -38,15 +36,18 @@ export class BoardService {
     }
 
     //게시글 수정
-    async EditBoard(userpayload:User, body:EditBoardReqDto):Promise<EditBoardResDto>{
+    async EditBoard(userpayload:User, board_pk: number , body:EditBoardReqDto):Promise<EditBoardResDto>{
         const user_data = await this.GetUserByPayload(userpayload);
-        await this.boardRepository.update(
-            {user:user_data},
-            {
-                board_title:body.board_title,
-                board_description:body.board_description,
-            },
+        
+        const updateResult = await this.boardRepository.update(
+            { board_pk : board_pk, user : user_data},
+            { board_title: body.board_title, board_description: body.board_description },  
         );
+
+        if (updateResult.affected === 0) {
+        throw new NotFoundException('수정할 게시글이 없거나 수정 권한이 없습니다.');
+    }
+    
         const text:EditBoardResDto = new EditBoardResDto();
         text.success_text = '수정하였습니다!';
         return text;

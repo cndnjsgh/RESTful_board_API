@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/security/guard';
-import { UserInfoResDto } from 'src/ResponeseDto/userinfo.respones';
+import { UserInfoResDto } from 'src/ResponseDto/userinfo.respones';
 import { User } from 'src/user_entity/user.entity';
-import { UserListInfoResDto } from 'src/ResponeseDto/userlistinfo.respones';
+import { UserListInfoResDto } from 'src/ResponseDto/userlistinfo.respones';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 
 @Controller('user')

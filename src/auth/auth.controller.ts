@@ -1,15 +1,15 @@
 import { Body, Controller, Delete, Headers, Patch, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterRequestDto } from 'src/RequestDto/register.request';
-import { RegisterResponseDto } from 'src/ResponeseDto/register.respones';
-import { LoginResponseDto } from 'src/ResponeseDto/login.respones';
+import { RegisterResponseDto } from 'src/ResponseDto/register.respones';
+import { LoginResponseDto } from 'src/ResponseDto/login.respones';
 import { LoginRequestDto } from 'src/RequestDto/login.request';
 import { AuthGuard } from 'src/security/guard';
 import { EditUserRequsetDto } from 'src/RequestDto/edituser.request';
-import { EditUserResponseDto } from 'src/ResponeseDto/edituser.respones';
+import { EditUserResponseDto } from 'src/ResponseDto/edituser.respones';
 import { User } from 'src/user_entity/user.entity';
-import { UnRegisterResponseDto } from 'src/ResponeseDto/unregister.respones';
-import { LogoutResDto } from 'src/ResponeseDto/logout.res';
+import { UnRegisterResponseDto } from 'src/ResponseDto/unregister.respones';
+import { LogoutResDto } from 'src/ResponseDto/logout.res';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 @Controller('auth')
 export class AuthController {

@@ -1,15 +1,15 @@
 import { Body, Controller, Delete, Get, Patch, Post, Request, UseGuards } from '@nestjs/common';
 import { BoardService } from './board.service';
 import { CreateBoardReqDto } from 'src/RequestDto/createboard.req';
-import { CreateBoardResDto } from 'src/ResponeseDto/createboard.res';
+import { CreateBoardResDto } from 'src/ResponseDto/createboard.res';
 import { User } from 'src/user_entity/user.entity';
 import { AuthGuard } from 'src/security/guard';
 import { EditBoardReqDto } from 'src/RequestDto/editboard.req';
-import { EditBoardResDto } from 'src/ResponeseDto/editboard.res';
-import { GetMyBoardResDto } from 'src/ResponeseDto/get.my.board.res';
-import { AllBoardResDto } from 'src/ResponeseDto/allboard.res';
+import { EditBoardResDto } from 'src/ResponseDto/editboard.res';
+import { GetMyBoardResDto } from 'src/ResponseDto/get.my.board.res';
+import { AllBoardResDto } from 'src/ResponseDto/allboard.res';
 import { DeleteBoardReqDto } from 'src/RequestDto/deleteboard.req';
-import { DeleteBoardResDto } from 'src/ResponeseDto/deleteboard.res';
+import { DeleteBoardResDto } from 'src/ResponseDto/deleteboard.res';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 
