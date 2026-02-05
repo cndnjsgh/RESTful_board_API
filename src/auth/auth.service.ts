@@ -55,7 +55,7 @@ export class AuthService {
             const token:LoginResponseDto = new LoginResponseDto();
             token.accesstoken = `Bearer ${accesstoken.accesstoken}`;
             token.refreshtoken = `Bearer ${refreshtoken.refreshtoken}`;
-            this.userRepository.update(
+            await this.userRepository.update(
                 {user_id:finduser.user_id},
                 {refreshtoken:token.refreshtoken}
             );
